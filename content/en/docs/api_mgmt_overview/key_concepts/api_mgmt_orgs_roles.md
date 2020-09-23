@@ -89,7 +89,7 @@ API consumer
 : The API consumer can create, read, update, and delete their applications. They can also give shared access to other users, granting permissions to view and monitor, or full access. If auto-approval is disabled, the user must wait for approval for new applications from the API administrator, or organization administrator if they have been delegated management responsibility. A user has full read access to all other users in the organization.
 
 Organization Administrator
-: The organization administrator has full read access to users and applications in their organization. If application management is delegated, they can also create, update, and delete. The organization administrator can monitor all applications in their organization. By default, organization administrators require an administrator's approval to publish and unpublish APIs owned by users in their organization. By setting *api.manager.orgadmin.selfservice.enabled* system property to *true*, the organization administrator will no longer require approval and will be able to directly publish and unpublish.
+: The organization administrator has full read access to users and applications in their organization. If application management is delegated, they can also create, update, and delete. The organization administrator can monitor all applications in their organization. By default, organization administrators require an administrator's approval to publish APIs owned by users in their organization and are not allowed to unpublish APIs. By setting *api.manager.orgadmin.selfservice.enabled* system property to *true*, the organization administrator will no longer require approval and will be able to directly publish and unpublish.
 
 ### API Administrators
 
