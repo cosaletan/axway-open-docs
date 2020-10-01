@@ -5,6 +5,7 @@
   "date": "2019-09-17",
   "description": "Learn about the API administrator, organization administrator, and API consumer roles in API management."
 }
+
 ## API Gateway user roles
 
 API Gateway provides the following main user roles.
