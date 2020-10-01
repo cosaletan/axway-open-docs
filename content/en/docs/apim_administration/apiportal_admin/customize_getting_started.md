@@ -1,7 +1,7 @@
 ---
 title: Customize API Portal look and feel
 linkTitle: Customize look and feel
-weight: 2
+weight: 20
 date: 2019-07-30T00:00:00.000Z
 description: Customize the look and feel of API Portal with your own logos,
   colors, and so on.

@@ -43,7 +43,7 @@ Create an environment by providing the environment name and the output in JSON f
 Create an environment by providing the path to a valid .yaml, .yml, or .json file that defines a specific resource:
 
  ```
- amplify central create environment -f <filepath>
+ amplify central create -f <filepath>
  ```
 
 Create an environment by providing the environment name (`env3`) and a path to a valid .yaml, .yml, or .json file that defines a specific resource:

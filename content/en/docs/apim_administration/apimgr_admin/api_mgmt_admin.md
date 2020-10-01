@@ -151,12 +151,16 @@ To create a user, perform the following steps:
    * **Name**: Enter the user's first name and surname to be used as a display name. This field is required.
    * **Email**: Enter an email address for the user. This field is required. This must be globally unique when the **Login Name** is set to the email address.
    * **Enabled**: Select whether the user is enabled. The user is enabled by default.
-3. Configure the following membership fields:
+3. Configure the following membership fields. You can use the **+** button to add multiple memberships:
    * **Organization**: Select the organization that the user belongs to. The default list includes the API Development organization only.
+
+        {{< alert title="Note">}}The first organization assigned to the user will be its **Primary Org**. This means that the user is logged into and associated with this organization by default, and if this organization is deleted the user is deleted together with it.{{< /alert >}}
+
    * **Role**: Select one of the following required roles for the user:
      * **API Manager Administrator**: This is the API administrator with full access rights.
      * **Organization Administrator**: This administrator has a subset of access rights within an organization.
      * **User**: This is the client application developer user (API consumer).
+
 4. Configure the following additional attributes:
    * **Phone**: Enter a phone number for the user.
    * **Description**: Enter a short description of the user.

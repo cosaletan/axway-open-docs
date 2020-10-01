@@ -265,6 +265,18 @@ const collections = [{
   label_singular: 'page in APIG extend section',
   description: 'All pages relating to extending API Gateway.',
 }, {
+  ...docsDefaults('apim_yamles', 'apim_yamles'),
+  name: 'apim_yamles',
+  label: 'YAML configuration',
+  label_singular: 'page in YAML configuration section',
+  description: 'All pages relating to YAML configuration.',
+}, {
+  ...docsDefaults('apim_yamles/apim_yamles_references', 'apim_yamles'),
+  name: 'apim_yamles_references',
+  label: 'YAML Configuration Reference',
+  label_singular: 'page in YAML configuration ref section',
+  description: 'All reference pages for YAML configuration.',
+}, {
   ...docsDefaults('apim_reference', 'APIGatewayDeveloperGuide'),
   name: 'apim_reference',
   label: 'Reference',

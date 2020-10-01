@@ -1,7 +1,7 @@
 ---
 title: Additional customizations
 linkTitle: Additional customizations
-weight: 7
+weight: 50
 date: 2019-07-30T00:00:00.000Z
 description: Customize other features of your API Portal, such as sign up,
   login, and application settings.
@@ -212,7 +212,7 @@ API Portal supports custom properties for the following entities:
 
 * **Application**: You can view and edit the values of the custom properties defined for applications.
 * **User**: You can view and edit the values of the custom properties defined for users.
-* **API**: You can only view the values of the custom properties defined for APIs. The values of the custom properties of the SOAP APIs are not displayed on the API Details page.
+* **API**: You can only view the values of the custom properties defined for APIs.
 
 API Portal does not support custom properties defined for organizations.
 

@@ -193,34 +193,7 @@ This upgrades the external OAuth and KPS databases (if necessary), creates a new
 
 When all steps have completed successfully, the new API Gateway version 7.7 processes should be running.
 
-### Step 5 - Run `update-apimanager`
-
-Run the `update-apimanager` script if any of the following products are installed:
-
-* API Manager
-* Client App Registry
-
-This script updates the active deployment in the product group. After running the script, you must recreate the product project (common project, containing Server Settings) from the deployment, so that you will not need to revert the changes the next time you perform a project deployment.
-
-As an alternative to recreating the product project, you can deploy only your common project to a development server and run the `update-apimanager` script against it, and then create a new common project from this API Gateway instance. Finally, you must deploy your updated policies to your application group.
-
-You can run this command once at the API Gateway group level, instead of on every API Gateway instance, for example:
-
-```
-/opt/Axway-7.7/apigateway/posix/bin/update-apimanager --username=admin --password=MY_PASSWORD --group=API_MGR_GROUP
-```
-
-If the API Gateway group is protected by a passphrase, you must append the command with `--passphrase=API_MGR_GROUP_PASSPHRASE`.
-
-The following command shows an example of running the `update-apimanager` script when the Client Application Registry is installed:
-
-```
-   /opt/Axway-7.7/apigateway/posix/bin/update-apimanager --username=admin --password=MY_PASSWORD --group=API_MGR_GROUP --product=clientappreg
-```
-
-If you do not specify the `--product` option, the script updates API Manager.
-
-### Step 6 - Verify the upgrade
+### Step 5 - Verify the upgrade
 
 To verify that the upgrade has been successful:
 
@@ -327,13 +300,7 @@ cd /opt/Axway-7.7/apigateway/upgrade/bin
 
 `sysupgrade` is now complete on all nodes. All the API Gateway 7.7 processes are running on all nodes in the topology.
 
-### Step 6 - Run `update-apimanager` on each API Manager node
-
-If API Manager is installed, follow the steps in [Run update-apimanager](#run-update-apimanager).
-
-### Step 7 - Verify the multi-node upgrade
-
-Verify the upgrade as detailed in [Verify the upgrade](#verify-the-upgrade).
+### Step 6 - Verify the multi-node upgrade
 
 For the sample topology you can also perform the following checks to verify the API Manager upgrade:
 

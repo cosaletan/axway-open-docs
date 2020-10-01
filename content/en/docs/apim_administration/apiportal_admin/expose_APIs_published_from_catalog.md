@@ -1,7 +1,7 @@
 ---
 title: Expose APIs published from the Unified Catalog
 linkTitle: Expose APIs published from the Unified Catalog
-weight: 22
+weight: 80
 date: 2020-05-29T00:00:00.000Z
 description: Configure API Portal to expose APIs, Applications, and
   Subscriptions from the AMPLIFY Unified Catalog (cloud platform), alongside

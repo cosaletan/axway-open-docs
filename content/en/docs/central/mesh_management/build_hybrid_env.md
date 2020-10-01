@@ -7,7 +7,6 @@ description: Learn how to build a basic Amazon EC2 private cloud hybrid
   environment and add the required tools to enable you to access and manage it
   remotely from a client system.
 ---
-
 {{< alert title="Public beta" color="warning" >}}This feature is currently in **public beta** and not yet available for production use.{{< /alert >}}
 
 ## Before you start
@@ -20,22 +19,23 @@ description: Learn how to build a basic Amazon EC2 private cloud hybrid
 
 Learn how to build a basic Amazon EC2 private cloud hybrid environment and add the required tools to enable you to access and manage it remotely from a client system.
 
-{{< alert title="Tip" color="" >}}For the latest Amazon EC2 build instructions, see the [Set up AMPLIFY Central mesh governance documentation on GitHub](https://github.com/Axway/Setup-Amplify-Mesh-Governance).{{< /alert >}}
+{{< alert title="Tip" color="" >}}For the latest Amazon EC2 build instructions and more client system configuration details, see [Set up AMPLIFY Central mesh governance documentation on GitHub](https://github.com/Axway/Setup-Amplify-Mesh-Governance).{{< /alert >}}
 
 ## Minimum requirements
 
 * Amazon EC2 instance with Kubernetes and Helm:
 
-    * Kubernetes 1.14 - 1.16 is required
-    * Helm 2.16.1 - 2.16.7 recommended
-    * Istioctl 1.6.1 -1.6.8 recommended
+    * Kubernetes 1.15 is supported
+    * Helm 2.16.7 or later (but not 3.x) is recommended
+
 * Public facing fully qualified domain name (FQDN) of the Amazon EC2 cluster
 * Client system (for example, Linux VM) with the following tools installed for accessing and managing your Amazon EC2 environment remotely:
 
-    * AWS CLI 1.16 recommended - Enables you to interact with AWS services from the command line. See the [AWS CLI installation documentation](https://docs.aws.amazon.com/cli/latest/userguide/li-chap-install.html).
-    * kubectl 1.14 - 1.17 recommended - Enables you to deploy and manage applications on Kubernetes from the command line. See the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
-    * kops 1.11 recommended - Helps you create, destroy, upgrade and maintain Kubernetes clusters from the command line. See the [kops installation documentation](https://github.com/kubernetes/kops/blob/master/docs/install.md).
-    * Helm 2.16.1 - 2.16.7 recommended - Enables you to install the Axway proprietary service mesh layer later, and to export Helm charts. See the [Helm installation documentation](https://helm.sh/docs/using_helm/#installing-helm).
+    * AWS CLI 1.16 or later is recommended - Enables you to interact with AWS services from the command line. See the [AWS CLI installation documentation](https://docs.aws.amazon.com/cli/latest/userguide/li-chap-install.html).
+    * kubectl 1.16 or later is recommended - Enables you to deploy and manage applications on Kubernetes from the command line. See the [kubectl installation documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+    * kops 1.16 or later is recommended - Helps you create, destroy, upgrade and maintain Kubernetes clusters from the command line. See the [kops installation documentation](https://github.com/kubernetes/kops/blob/master/docs/install.md).
+    * Helm 2.16.7+ (but not 3.x) is recommended - Enables you to install the Axway proprietary service mesh layer later and to export Helm charts. See the [Helm installation documentation](https://helm.sh/docs/using_helm/#installing-helm).
+    * Istioctl - Used after the environment is built for the next phase to deploy the service mesh and add this environment to AMPLIFY Central.
 
 ## Build an Amazon EC2 hybrid environment
 

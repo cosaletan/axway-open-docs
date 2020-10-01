@@ -702,7 +702,7 @@ additional ports can be exposed (secure and insecure ports 8443, 8080
 and 8081). This component uses a volume mount point with read/write
 multiple pods capabilities to store events. Other data to persist is
 streamed out by FluentD. With this approach, you can reduce the size
-of persistence data required for log/even data.
+of persistence data required for log/event data.
 
 The API Gateway/Manager container is the same as the API Manager UI
 container. The deployment parameters are the same. The only differences
@@ -1107,7 +1107,7 @@ could potentially lose without seriously affecting your business. A
 daily backup may be a good starting point. There are a couple of good blogs on backing up and restoring Cassandra:
     * [Cassandra Backup and Restore - Backup in AWS using EBS Volumes](https://thelastpickle.com/blog/2018/04/03/cassandra-backup-and-restore-aws-ebs.html)
     * [Medusa - Spotify's Apache Cassandra backup tool is now open source](https://thelastpickle.com/blog/2019/11/05/cassandra-medusa-backup-tool-is-open-source.html)
-* Log/trace/even files - your backup strategy will depend on your
+* Log/trace/event files - your backup strategy will depend on your
 choice of infrastructure. For running on AWS, we use AWS S3 service
 that has high durability and reliability metrics (see [Data Durability](https://docs.aws.amazon.com/AmazonS3/latest/dev/DataDurability.html)). Log files are not required to run API Gateway. Thus, if you use AWS
 S3 service (or similar), there is no need to back up log files. If

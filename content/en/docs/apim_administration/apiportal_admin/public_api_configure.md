@@ -1,7 +1,7 @@
 ---
 title: Configure Public API mode
 linkTitle: Configure Public API mode
-weight: 13
+weight: 70
 date: 2019-07-30T00:00:00.000Z
 description: >-
   Expose APIs and applications publicly to users who are not logged in to your

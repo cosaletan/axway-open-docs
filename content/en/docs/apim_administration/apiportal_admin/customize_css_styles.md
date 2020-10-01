@@ -1,7 +1,7 @@
 ---
 title: Customize CSS styles
 linkTitle: Customize CSS styles
-weight: 3
+weight: 30
 date: 2019-07-30
 description: Customize CSS styles directly or create a custom CSS stylesheet.
 ---

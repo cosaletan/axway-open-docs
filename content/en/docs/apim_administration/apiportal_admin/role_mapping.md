@@ -1,7 +1,7 @@
 ---
 title: Configure user groups mapping
 linkTitle: Configure user groups mapping
-weight: 21
+weight: 80
 date: 2019-07-30
 description: Map API Manager user roles to Joomla! user groups.
 ---

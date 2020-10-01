@@ -65,6 +65,8 @@ of Embedded Apache ActiveMQ, Apache ActiveMQ, or Standard JMS:
 **Connection Factory**: Enter the name of the connection factory to use when connecting to the JMS provider. The name of the connection factory is vendor-specific. For example, the connection factory for the JBoss application server is `org.jnp.interfaces:javax.jnp`. Defaults to `connectionFactory`
 for embedded and external ActiveMQ.
 
+{{< alert title="Note" color="primary" >}}Since version 5.15.6 of **Apache ActiveMQ JMS API**, client connections using SSL are checking that the server certificate common name (CN) matches the host name provided in the connection URL. You can disable this feature by setting the `socket.verifyHostName` parameter to `false` in the provider URL. For example, `ssl://activemq.server.name:61616?socket.verifyHostName=false`.{{< /alert >}}
+
 ### IBM WebSphere MQ settings
 
 The following settings are displayed when you select a **Service Type**

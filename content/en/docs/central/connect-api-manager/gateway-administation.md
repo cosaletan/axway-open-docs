@@ -244,7 +244,7 @@ The `host`, which represents the email server, can be configured with minimal se
 host: smtp.gmail.com
 port: 587
 username: your GMAIL account
-password: your GMAIL password
+password: application generated GMAIL password (see note below)
 authtype: PLAIN
 
 # Microsoft office server
@@ -258,7 +258,7 @@ authtype: LOGIN
 host: smtp-mail.outlook.com
 port: 587
 username: your Outlook Mail account
-password: your Office Mail password
+password: application generated Yahoo password (see note below)
 authType: PLAIN
 
 # Yahoo email server
@@ -268,6 +268,11 @@ username: your Yahoo Mail account
 password: your Yahoo Mail password
 authtype: PLAIN
 ```
+
+**Note**: You will be required to use an application generated password instead of the actual user email password for the following email servers. Follow the links for application generated passwords.
+
+* Gmail - [Application generated gmail password](https://support.google.com/accounts/answer/185833?hl=en). Use this password in place of your actual password in the agent configuration `password:` field.
+* Yahoo - [Application generated yahoo password](https://help.yahoo.com/kb/generate-third-party-passwords-sln15241.html). Use this password in place of your actual password in the agent configuration `password:` field.
 
 ### Customizing Webhook Notification (subscription)
 

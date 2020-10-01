@@ -1,7 +1,7 @@
 ---
 title: Localization of API Portal
 linkTitle: Localization
-weight: 11
+weight: 60
 date: 2019-07-30T00:00:00.000Z
 description: You can localize the API Portal user interface to use another
   language, or change time and date formats.
@@ -58,7 +58,6 @@ To install the translated file:
    ```
    /opt/axway/apiportal/htdoc/language/en-GB/en-GB.com_apiportal.ini
    ```
-
 2. Go to resource file directory of the language you installed (for example, `/opt/axway/apiportal/htdoc/language/fr-FR/`), and paste the copied file there.
 3. Rename the copied `.ini` file to match the language code of the installed language (for example, `fr-FR.com_apiportal.ini`).
 4. Open both the English `.ini` file and the copied `.ini` file.
@@ -76,7 +75,6 @@ Some texts on the sign in page are controlled by text overrides, and you have to
    ```
    /opt/axway/apiportal/htdoc/language/overrides/
    ```
-
 2. Copy the file `en-GB.override`.
 3. Paste the file in the same directory, and rename it to match your new language (for example, `fr-FR.override`).
 4. Open the renamed file, find the UI string with the value `Login Name`, and change the value of the string to the new language translation (for example, `Identifiant`).
@@ -99,8 +97,7 @@ To add a new content language and main menu, follow these steps:
 1. In the JAI left navigation bar, click **Language(s) > Content Languages**.
 2. Click **New** to add a new content language.
 
-    {{< alert title="Note" color="primary" >}}If you have already installed a new language, a corresponding content language will already exist for that language and you can skip the following steps 3 to 7, and continue from step 8.{{< /alert >}}
-
+   {{< alert title="Note" color="primary" >}}If you have already installed a new language, a corresponding content language will already exist for that language and you can skip the following steps 3 to 7, and continue from step 8.{{< /alert >}}
 3. On the **Details** tab, enter the **Title** and **Title Native** for the new language. The titles can be the same.
 4. Enter the Joomla! **Language Tag**. Ensure that you enter the tag in the correct format. You must use "`-`" instead of "`_`" (for example, `fr-FR`).
 5. In **URL Language Code**, enter the language identifier to use in the language-specific URL (for example, `fr`). The identifier must be unique for each language.
@@ -208,7 +205,7 @@ First, create a main menu that will be the default main menu for all languages. 
 5. To add a menu item to this main menu, click **Menus > Main menu - All > Add New Menu Item**.
 6. Click **Save & Close**.
 
-    ![Add menu item for Main menu -All](/Images/APIPortal/jai_mainmenuall_home.png)
+   ![Add menu item for Main menu -All](/Images/APIPortal/jai_mainmenuall_home.png)
 
 #### Change the language of the original main menu to English
 
@@ -299,22 +296,3 @@ To enable the language switcher, complete the following steps:
 The language switcher is now available on the footer of each API Portal page. For example:
 
 ![Language switcher on footer](/Images/APIPortal/lang_switcher_example.png)
-
-## Change API Portal date and time formats
-
-By default, API Portal uses the date-month-year (like "10 Mar 2017") format for dates and 24-hour clock for time. This section describes how to change the time and date formats in API Portal.
-
-1. Go to resource file directory of the language you want (for example, `/opt/axway/apiportal/htdoc/language/fr-FR/`), and open the language resource file (`fr-FR.com_apiportal.ini`).
-2. To change just the date format, find the UI string `COM_APIPORTAL_LOCAL_DATE_FORMAT`. To change both the date and time format, find the UI string `COM_APIPORTAL_LOCAL_DATE_TIME_FORMAT`.
-3. Change the value of the UI string to the format you want. The default format is `d M Y`. For more details on the formats PHP supports, see the [PHP documentation for the date function](http://php.net/manual/en/function.date.php).
-
-The following list provides some examples on formats and their outputs:
-
-* `m.d.y` — 03.10.17
-* `j, n, Y` — 10, 3, 2017
-* `Ymd` — 20170310
-* `F j, Y, g:i a` — March 10, 2017, 5:16 pm
-* `D M j G:i:s T Y` — Fri Mar 10 17:16:18 UCT 2017
-* `g:i a` — 5:16 pm
-* `H:i:s` — 17:16:18
-* `Y-m-d H:i:s` — 2017-03-10 17:16:18 (the MySQL DATETIME format)

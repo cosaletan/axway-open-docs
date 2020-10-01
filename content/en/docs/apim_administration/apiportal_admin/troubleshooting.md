@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting API Portal
 linkTitle: Troubleshooting
-weight: 23
+weight: 110
 date: 2019-07-30
 description: General troubleshooting steps for API Portal, as well as specific problems and recommended solutions.
 ---

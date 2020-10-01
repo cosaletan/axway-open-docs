@@ -125,10 +125,10 @@ The inputs to the IAM Setup CloudFormation Template (`amplify-agents-deploy-all.
 | AgentResourcesBucket          | The S3 bucket that has the resources needed for deploying this stack, lambda and nested stack templates                                   |                                 | both       |
 | EC2AgentDeploy                | If set to true, the Instance Role and Profile will be created to give to the EC2 Instance. If false, a User will be created                    | true                            | continuous |
 | EC2StackVPCID                 | The VPC to deploy the EC2 instance to. Leave blank to deploy all infrastructure                                                           |                                 | continuous |
-| EC2StackSecurityGroup         | The Security Group to assign to the EC2 instance. Not needed when deploying all infrastructure                                            |                                 | continuous |
-| EC2StackSubnet                | The Subnet the EC2 instance will be in. Not needed when deploying all infrastructure                                                      |                                 | continuous |
+| EC2StackSecurityGroup         | The Security Group to assign to the EC2 instance. Not needed when deploying all infrastructure. Supply when EC2StackVPCID is not blank                                            |                                 | continuous |
+| EC2StackSubnet                | The Subnet the EC2 instance will be in. Not needed when deploying all infrastructure. Supply when EC2StackVPCID is not blank                                                      |                                 | continuous |
 | EC2StackKeyName               | The SSH Key to deploy inside the EC2 instance                                                                                             |                                 | continuous |
-| EC2StackInstanceType          | The instance type to use for this EC2 instance                                                                                            | t1.micro                        | continuous |
+| EC2StackInstanceType          | The instance type to use for this EC2 instance                                                                                            | t3.micro                        | continuous |
 | EC2StackSSHLocation           | The CIDR range that is allowed to SSH to the instance                                                                                     | 0.0.0.0/0                       | continuous |
 | EC2StackPublicIPAddress       | Assign a Public IP address, the agents needs internet access for AMPLIFY Central communication                                            | true                            | continuous |
 
@@ -144,7 +144,8 @@ The resources created by the CloudFormation template:
 | AWS::IAM::ManagedPolicy               | APICAgentsPolicy                  |                                                          | Creates the IAM Policy that the agents will utilize                                                | both           |
 | AWS::IAM::Role                        | AgentsInstanceRole                | EC2AgentDeploy = true                                    | Creates the IAM Instance Role to assign to the IAM instance role                                   | continuous     |
 | AWS::IAM::InstanceProfile             | AgentsInstanceProfile             | EC2AgentDeploy = true                                    | Creates the IAM Instance Profile to assign to the EC2 instance                                     | continuous     |
-| AWS::IAM::APICAgentsUser              | APICAgentsUser                    | EC2AgentDeploy = false                                   | Creates the IAM User to generate keys for to supply to the agents                                  | both           |
+| AWS::IAM::Group              | APICAgentsGroup                    | EC2AgentDeploy = false                                   | Creates the IAM Group which has the APICAgentsPolicy                                   | both           |
+| AWS::IAM::User              | APICAgentsUser                    | EC2AgentDeploy = false                                   | Creates the IAM User to generate keys for to supply to the agents                                  | both           |
 | AWS::CloudFormation::Stack            | ResourcesStack                    |                                                          | Creates the Resources Stack for the APIC Agents                                                    | both           |
 | AWS::CloudFormation::Stack            | EC2Stack                          | EC2AgentDeploy = true                                    | Creates the EC2 Stack for the APIC Agents                                                          | continuous     |
 | **Nested Stack Resources**          |                                   |                                                          |                                                                                                    |                |
@@ -263,7 +264,7 @@ Managed Policies
 
 ##### APICAgentsPolicy
 
-The group that has all of the policies attached which are needed by the APICAgentsUser
+The policy that has all of the access required by the APICAgentsUser
 
 Policies
 
@@ -313,6 +314,10 @@ Role
 | Role               | Description              |
 | ------------------ | ------------------------ |
 | AgentsInstanceRole | The role described above |
+
+##### APICAgentsGroup
+
+The group that is assigned the APICAgentsPolicy
 
 ##### APICAgentsUser
 

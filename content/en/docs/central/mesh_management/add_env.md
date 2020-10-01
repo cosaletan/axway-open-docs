@@ -80,33 +80,32 @@ To expose an HTTPS endpoint of a service within your environment to external tra
    * The public key certificate must be PEM encoded and match the given private key.
 2. Create the Istio namespace. This is the namespace where Istio will be deployed.
 
-    Usage: `kubectl create namespace NAMESPACE_NAME`
+   Usage: `kubectl create namespace NAMESPACE_NAME`
 
-    The default value of `NAMESPACE_NAME` is `istio-system`, and this value is used later when the helm upgrade deployment steps are executed in [Deploy the service mesh and Axway mesh agents](#deploy-the-service-mesh-and-axway-mesh-agents).
+   The default value of `NAMESPACE_NAME` is `istio-system`, and this value is used later when the helm upgrade deployment steps are executed in [Deploy the service mesh and Axway mesh agents](#deploy-the-service-mesh-and-axway-mesh-agents).
 
-    Example:
+   Example:
 
-    ```
-    kubectl create namespace istio-system
-    namespace/istio-system created
-    ```
-
+   ```
+   kubectl create namespace istio-system
+   namespace/istio-system created
+   ```
 3. Create a Kubernetes TLS secret to hold the public certificate and private key, and deploy it into the Istio namespace.
 
-    Usage: `kubectl create secret tls SECRET_NAME -n NAMESPACE_NAME --key /PATH/TO/KEY/FILE --cert /PATH/TO/CERT/FILE`
+   Usage: `kubectl create secret tls SECRET_NAME -n NAMESPACE_NAME --key /PATH/TO/KEY/FILE --cert /PATH/TO/CERT/FILE`
 
-    `SECRET_NAME` must match the field `secretName` in the `istioOverride.yaml` Helm chart that you downloaded from AMPLIFY Central as part of the hybrid kit. The `secretName` in the Helm chart  is generated from your domain name, for example, `kubernetes-cluster-example-certs` for the domain `kubernetes-cluster.example.com`.
+   `SECRET_NAME` must match the field `secretName` in the `istioOverride.yaml` Helm chart that you downloaded from AMPLIFY Central as part of the hybrid kit. The `secretName` in the Helm chart  is generated from your domain name, for example, `kubernetes-cluster-example-certs` for the domain `kubernetes-cluster.example.com`.
 
-    Example:
+   Example:
 
-    ```
-    kubectl create secret tls kubernetes-cluster-example-certs -n istio-system --key kubernetes-cluster.example.com.key.pem --cert kubernetes-cluster.example.com.cert.pem
-    secret/kubernetes-cluster-example-certs created
-    kubectl get secrets -n istio-system
-    NAME                               TYPE                                  DATA   AGE
-    kubernetes-cluster-example-certs   kubernetes.io/tls                     2      4m
-    default-token-jvw9m                kubernetes.io/service-account-token   3      27m
-    ```
+   ```
+   kubectl create secret tls kubernetes-cluster-example-certs -n istio-system --key kubernetes-cluster.example.com.key.pem --cert kubernetes-cluster.example.com.cert.pem
+   secret/kubernetes-cluster-example-certs created
+   kubectl get secrets -n istio-system
+   NAME                               TYPE                                  DATA   AGE
+   kubernetes-cluster-example-certs   kubernetes.io/tls                     2      4m
+   default-token-jvw9m                kubernetes.io/service-account-token   3      27m
+   ```
 
 ### Generate key pairs and secrets for the Axway mesh agents
 
@@ -203,140 +202,130 @@ After you have created the key pairs and secrets, deploy the Axway proprietary s
 
 1. To ensure that you have the latest Axway Helm charts, update your Helm repositories:
 
-    ```
-    helm repo up
-    Hang tight while we grab the latest from your chart repositories...
-    ...Skip local chart repository
-    ...Successfully got an update from the "axway" chart repository
-    Update Complete. ⎈ Happy Helming!⎈
-    ```
-
+   ```
+   helm repo up
+   Hang tight while we grab the latest from your chart repositories...
+   ...Skip local chart repository
+   ...Successfully got an update from the "axway" chart repository
+   Update Complete. ⎈ Happy Helming!⎈
+   ```
 2. Change to the directory where you unzipped the hybrid kit:
 
-    ```
-    cd e4fd7216693f50360169492633ab0122/
-    ```
+   ```
+   cd e4fd7216693f50360169492633ab0122/
+   ```
+3. From Istio 1.6+, `Istioctl` is required for installing Istio. If you have not previously added it to your client system, you can download `Istioctl` using the following command:
 
-3. From Istio 1.6+, `Istioctl` is required for installing Istio. Download `Istioctl` using the following command:
+   ```
+   curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -
+   ```
+4. Export the path where you downloaded `Istioctl` to start using it. Note the use of `$PWD` below and change it accordingly.
 
-    ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -
+   ```
+   export PATH=$PATH:$PWD/istio-1.6.8/bin
+   ```
+5. Install Istio using `Istioctl`. This step can take several minutes to complete.
 
-    ```
+   ```
+   istioctl install --set profile=demo -f <pathtooverridefile>/istioOverride.yaml
 
-4. Export the path to start using `Istioctl`. Note the use of `$PWD` and change it accordingly.
-
-    ```
-    export PATH=$PATH:$PWD/istio-1.6.8/bin
-
-    ```
-
-5. Install Istio. This step can take several minutes to complete.
-
-    ```
-    istioctl install --set profile=demo -f <pathtooverridefile>/istioOverride.yaml
-
-     ✔ Istio core installed
-     ✔ Istiod installed  
-     ✔ Policy installed
-     ✔ Ingress gateways installed
-     ✔ Telemetry installed
-     ✔ Addons installed
-     ✔ Installation complete
-    ```
-
+    ✔ Istio core installed
+    ✔ Istiod installed  
+    ✔ Policy installed
+    ✔ Ingress gateways installed
+    ✔ Telemetry installed
+    ✔ Addons installed
+    ✔ Installation complete
+   ```
 6. Verify that Istio is deployed successfully:
 
-    ```
-    kubectl get services -n istio-system
-    ```
+   ```
+   kubectl get services -n istio-system
+   ```
 
-    The output of this command should list an domain edge gateway and a number of Istio services.
-
+   The output of this command should list an domain edge gateway and a number of Istio services.
 7. Deploy the Axway mesh agents. This step can take several minutes to complete.
 
-    Usage: `helm upgrade --install --namespace NAMESPACE_NAME RELEASE CHART -f /PATH/TO/OVERRIDE/VALUES [OPTIONS]`
+   Usage: `helm upgrade --install --namespace NAMESPACE_NAME RELEASE CHART -f /PATH/TO/OVERRIDE/VALUES [OPTIONS]`
 
-    Example:
+   Example:
 
-    ```
-    helm upgrade --install --namespace apic-control apic-hybrid axway/apicentral-hybrid -f ./hybridOverride.yaml --set als.enabled=true
+   ```
+   helm upgrade --install --namespace apic-control apic-hybrid axway/apicentral-hybrid -f ./hybridOverride.yaml --set als.enabled=true
 
-    Release "apic-hybrid" does not exist. Installing it now.
-    NAME:   apic-hybrid
-    LAST DEPLOYED: Wed Aug  5 20:25:53 2020
-    NAMESPACE: apic-control
-    STATUS: DEPLOYED
+   Release "apic-hybrid" does not exist. Installing it now.
+   NAME:   apic-hybrid
+   LAST DEPLOYED: Wed Aug  5 20:25:53 2020
+   NAMESPACE: apic-control
+   STATUS: DEPLOYED
 
-    RESOURCES:
-    ==> v1/Deployment
-    NAME             AGE
-    apic-hybrid-als  2s
+   RESOURCES:
+   ==> v1/Deployment
+   NAME             AGE
+   apic-hybrid-als  2s
 
-    ==> v1/Pod(related)
-    NAME                               AGE
-    apic-hybrid-als-7459c5578b-98fnn   2s
-    apic-hybrid-als-7459c5578b-zhjmh   2s
-    apic-hybrid-csa-787c48c7c4-5gqsk   2s
-    apic-hybrid-list-598f8f9b4b-zvp4r  2s
-    apic-hybrid-sda-64946c45b9-kw5m2   2s
+   ==> v1/Pod(related)
+   NAME                               AGE
+   apic-hybrid-als-7459c5578b-98fnn   2s
+   apic-hybrid-als-7459c5578b-zhjmh   2s
+   apic-hybrid-csa-787c48c7c4-5gqsk   2s
+   apic-hybrid-list-598f8f9b4b-zvp4r  2s
+   apic-hybrid-sda-64946c45b9-kw5m2   2s
 
-    ==> v1/Service
-    NAME              AGE
-    apic-hybrid-als   2s
-    apic-hybrid-csa   2s
-    apic-hybrid-list  2s
+   ==> v1/Service
+   NAME              AGE
+   apic-hybrid-als   2s
+   apic-hybrid-csa   2s
+   apic-hybrid-list  2s
 
-    ==> v1/ServiceAccount
-    NAME             AGE
-    apic-hybrid-als  3s
-    apic-hybrid-csa  3s
-    apic-hybrid-sda  3s
+   ==> v1/ServiceAccount
+   NAME             AGE
+   apic-hybrid-als  3s
+   apic-hybrid-csa  3s
+   apic-hybrid-sda  3s
 
-    ==> v1alpha3/EnvoyFilter
-    NAME                                 AGE
-    patch-gateway-and-sidecars-with-als  2s
-    patch-gateway-and-sidecars-with-lua  2s
-    patch-gateway-route-config           2s
-    patch-inbound-route-config           2s
-    patch-outbound-route-config          2s
+   ==> v1alpha3/EnvoyFilter
+   NAME                                 AGE
+   patch-gateway-and-sidecars-with-als  2s
+   patch-gateway-and-sidecars-with-lua  2s
+   patch-gateway-route-config           2s
+   patch-inbound-route-config           2s
+   patch-outbound-route-config          2s
 
-    ==> v1beta1/ClusterRole
-    NAME             AGE
-    apic-hybrid-csa  3s
-    apic-hybrid-sda  3s
+   ==> v1beta1/ClusterRole
+   NAME             AGE
+   apic-hybrid-csa  3s
+   apic-hybrid-sda  3s
 
-    ==> v1beta1/ClusterRoleBinding
-    NAME             AGE
-    apic-hybrid-csa  2s
-    apic-hybrid-sda  3s
+   ==> v1beta1/ClusterRoleBinding
+   NAME             AGE
+   apic-hybrid-csa  2s
+   apic-hybrid-sda  3s
 
-    ==> v1beta1/CustomResourceDefinition
-    NAME                  AGE
-    syncpoints.axway.com  3s
+   ==> v1beta1/CustomResourceDefinition
+   NAME                  AGE
+   syncpoints.axway.com  3s
 
-    ==> v1beta2/Deployment
-    NAME              AGE
-    apic-hybrid-csa   2s
-    apic-hybrid-list  2s
-    apic-hybrid-sda   2s
-    ```
-
+   ==> v1beta2/Deployment
+   NAME              AGE
+   apic-hybrid-csa   2s
+   apic-hybrid-list  2s
+   apic-hybrid-sda   2s
+   ```
 8. Verify that the mesh agents are deployed in the `apic-control` namespace:
 
-    ```
-     kubectl get services -n apic-control
-    ```
+   ```
+    kubectl get services -n apic-control
+   ```
 
-     The output of this command should list the mesh agent services.
-
+    The output of this command should list the mesh agent services.
 9. Verify that the list demo service is deployed in the `apic-demo` namespace:
 
-    ```
-    kubectl get services -n apic-demo
-    ```
+   ```
+   kubectl get services -n apic-demo
+   ```
 
-    The output of this command should list the demo list service.
+   The output of this command should list the demo list service.
 10. Verify that your environment is now connected in AMPLIFY Central UI:
 
     ![Connected environment in AMPLIFY Central](/Images/central/hybrid__env_connected.png)

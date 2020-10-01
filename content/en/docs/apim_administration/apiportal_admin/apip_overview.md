@@ -1,7 +1,7 @@
 ---
 title: API Portal overview
 linkTitle: Overview
-weight: 1
+weight: 10
 date: 2019-07-30T00:00:00.000Z
 description: Learn the key capabilities and features of API Portal.
 ---

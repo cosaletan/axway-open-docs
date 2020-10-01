@@ -161,3 +161,4 @@ This script was removed in 7.6.2 SP1 and SP2, it was moved into migration steps 
 | 7.7.0_SP20200130 | 06-Feb-2020 | Fixed script error when updating Client App Registry. |
 | 7.7.0_SP20200331 | 31-Mar-2020 | - |
 | 7.7.0_SP20200530 | 27-May-2020 | UX was improved; added option that allows user to specify project directory to run update. |
+| 7.7.0_SP20200930 | 30-Sep-2020 | update-apimanager.py has been removed in this release. Updates to API Manager are applied via config upgrade in the Service Pack, through Policy Studio upgrade, or the projupgrade and upgrade-policy tools |
